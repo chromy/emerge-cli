@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+ROOT="$( dirname $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd ) )"
+NODE_PATH="$(which node)"
+cd $ROOT
+
+node --experimental-sea-config sea.json
+cp $NODE_PATH out/emerge
+codesign --remove-signature out/emerge
+pnpx postject out/emerge NODE_SEA_BLOB out/sea.blob \
+    --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2 \
+    --macho-segment-name NODE_SEA
+codesign --sign - out/emerge

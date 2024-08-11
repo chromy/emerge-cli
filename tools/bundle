@@ -5,6 +5,4 @@ set -e
 ROOT="$( dirname $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd ) )"
 cd $ROOT
 
-pnpm exec eslint --fix
-pnpm exec prettier --log-level warn --config .prettierrc.json -w src
-
+pnpm exec esbuild --bundle src/run-cli.ts --outfile=out/bundle.js --log-level=warning

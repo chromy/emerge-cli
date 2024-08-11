@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tools/build",
+    "check": "tools/check",
+    "fix": "tools/fix",
+    "bundle": "tools/bundle",
+    "package": "tools/pacakge"
   },
   "type": "module",
   "keywords": [],
@@ -13,10 +17,16 @@
   "dependencies": {
     "@clack/prompts": "^0.7.0",
     "@types/command-line-args": "^5.2.3",
+    "@types/command-line-usage": "^5.0.4",
+    "@types/node": "^22.2.0",
     "axios": "^1.7.3",
     "command-line-args": "^6.0.0",
+    "command-line-usage": "^7.0.3",
     "esbuild": "^0.23.0",
+    "open": "^10.1.0",
     "ospec": "^4.2.0",
+    "picocolors": "^1.0.1",
+    "pkg": "^5.8.1",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4"
   },

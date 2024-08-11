@@ -4,4 +4,4 @@ set -e
 
 ROOT="$( dirname $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd ) )"
 
-pnpm exec eslint --fix
+pnpm exec tsc
