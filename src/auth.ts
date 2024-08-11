@@ -2,16 +2,15 @@ import os from "node:os";
 import fs from "node:fs";
 import path from "node:path";
 import pc from "picocolors";
-import open from "open";
 import { intro, outro, password } from "@clack/prompts";
-import { pause } from "./helpers.js";
+import { pause, openUrl } from "./helpers.js";
 
 export async function auth(): Promise<boolean> {
   intro(pc.bgBlue(` emergetools auth `));
 
   await pause("Opening emergetools.com to create a new auth key.");
 
-  open(
+  await openUrl(
     "https://www.emergetools.com/settings?tab=integration&cards=new_api_key"
   );
 

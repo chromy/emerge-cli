@@ -5,4 +5,8 @@ set -e
 ROOT="$( dirname $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd ) )"
 cd $ROOT
 
-pnpm exec esbuild --bundle src/run-cli.ts --platform=node --outfile=out/bundle.js --log-level=warning
+pnpm exec esbuild --bundle src/run-cli.ts \
+  --platform=node \
+  --outfile=out/bundle.cjs \
+  --log-level=warning \
+  --format=cjs

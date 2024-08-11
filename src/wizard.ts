@@ -1,7 +1,6 @@
 import pc from "picocolors";
-import open from "open";
 import { intro, outro, select, confirm } from "@clack/prompts";
-import { pause } from "./helpers.js";
+import { pause, openUrl } from "./helpers.js";
 
 function docLink(url: string): () => Promise<void> {
   return async () => {
@@ -13,7 +12,7 @@ function docLink(url: string): () => Promise<void> {
     });
 
     if (shouldContinue) {
-      open(url);
+      await openUrl(url);
     }
   };
 }
