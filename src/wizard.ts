@@ -60,6 +60,7 @@ export async function wizard(): Promise<boolean> {
       { value: 'android', label: 'Android' },
     ],
   });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   await (wizardTable as any)[product as any][platform as any]();
   outro(`You're all set!`);
   return true;

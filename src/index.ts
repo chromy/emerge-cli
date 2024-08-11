@@ -1,6 +1,8 @@
 import commandLineArgs from "command-line-args";
 import commandLineUsage from "command-line-usage";
 import {wizard} from "./wizard.js";
+import {auth} from "./auth.js";
+import {upload, UploadOptions} from "./upload.js";
 
 const subcommands = [
   { name: 'auth', summary: 'Authenticate with Emergetools.' },
@@ -28,25 +30,22 @@ const help = [
 ];
 
 export async function doAuth(argv: string[]): Promise<number> {
-  const definitions = [
-    { name: "squash", type: Boolean },
-    { name: "message", alias: "m" },
-  ];
-  const options = commandLineArgs(definitions, { argv });
-  console.log(options);
-  return 0;
+  commandLineArgs([], { argv });
+  return await auth() ? 0 : 1;
 }
 
 async function doWizard(argv: string[]): Promise<number> {
-  const options = commandLineArgs([], { argv });
+  commandLineArgs([], { argv });
   return await wizard() ? 0 : 1;
 }
 
 async function doUpload(argv: string[]): Promise<number> {
-  const options = commandLineArgs([], { argv });
-  return await wizard() ? 0 : 1;
+  const definitions = [
+    { name: 'path', defaultOption: true },
+  ];
+  const options = commandLineArgs(definitions, { argv }) as UploadOptions;
+  return await upload(options) ? 0 : 1;
 }
-
 
 function printUsage(): void {
   const usage = commandLineUsage(help);
