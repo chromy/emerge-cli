@@ -30,7 +30,8 @@
     "picocolors": "^1.0.1",
     "pkg": "^5.8.1",
     "prettier": "^3.3.3",
-    "sisteransi": "^1.0.5"
+    "sisteransi": "^1.0.5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
