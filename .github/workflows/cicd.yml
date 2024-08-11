@@ -23,4 +23,9 @@ jobs:
       - run: tools/build
       - run: tools/bundle
       - run: tools/package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: "emerge-macos"
+          path: "out/emerge"
+          if-no-files-found: "error"
 
