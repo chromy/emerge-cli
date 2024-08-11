@@ -70,8 +70,6 @@ async function doMain(): Promise<number> {
     return 0;
   }
 
-  console.log(options.command);
-
   switch (options.command) {
     case "auth":
       return doAuth(argv);
