@@ -1,13 +1,7 @@
 import pc from "picocolors";
 import open from "open";
 import { intro, outro, select, confirm } from "@clack/prompts";
-
-async function pause(message: string): Promise<void> {
-  await select({
-    message,
-    options: [{ value: true, label: pc.gray("[continue]") }],
-  });
-}
+import { pause } from "./helpers.js";
 
 function docLink(url: string): () => Promise<void> {
   return async () => {
