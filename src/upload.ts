@@ -11,6 +11,7 @@ export async function upload(options: UploadOptions): Promise<boolean> {
     console.log("Must authenticate with emerge auth before uploading.");
     return false;
   }
+
   await axios({
     method: "get",
     url: "https://api.emergetools.com/upload",
