@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+ROOT="$( dirname $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd ) )"
+cd $ROOT
+
+pnpm exec tsc
+pnpm exec eslint
+pnpm exec prettier --check src/
+
