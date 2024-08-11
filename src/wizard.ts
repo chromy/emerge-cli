@@ -44,7 +44,7 @@ const wizardTable = {
 };
 
 export async function wizard(): Promise<boolean> {
-  intro(pc.bgBlue(`emergetools setup wizard`));
+  intro(pc.bgBlue(` emergetools setup wizard `));
   const product = await select({
     message: 'Pick a product.',
     options: [
