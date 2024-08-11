@@ -1,5 +1,5 @@
 import commandLineArgs from "command-line-args";
-import commandLineUsage from "command-line-usage";
+import commandLineUsage, { OptionDefinition } from "command-line-usage";
 import { wizard } from "./wizard.js";
 import { auth } from "./auth.js";
 import { upload, UploadOptions } from "./upload.js";
@@ -46,12 +46,28 @@ async function doWizard(argv: string[]): Promise<number> {
 
 async function doUpload(argv: string[]): Promise<number> {
   const definitions = [{ name: "path", defaultOption: true }];
-  const options = commandLineArgs(definitions, { argv }) as UploadOptions;
-  return (await upload(options)) ? 0 : 1;
+  const rawOptions = commandLineArgs(definitions, { argv });
+  try {
+    const options = UploadOptions.parse(rawOptions);
+    return (await upload(options)) ? 0 : 1;
+  } catch {
+    printSubcommandUsage("upload", definitions);
+  }
+  return 1;
 }
 
 function printUsage(): void {
   const usage = commandLineUsage(help);
+  console.log(usage);
+}
+
+function printSubcommandUsage(cmd: string, options: OptionDefinition[]): void {
+  const usage = commandLineUsage([
+    {
+      header: `emerge ${cmd}`,
+      optionList: options,
+    },
+  ]);
   console.log(usage);
 }
 

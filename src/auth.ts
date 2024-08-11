@@ -36,7 +36,8 @@ export function storeKey(key: string): void {
 export function loadKey(): string | undefined {
   const p = getKeyPath();
   if (fs.existsSync(p)) {
-    return fs.readFileSync(getKeyPath(), { encoding: "utf8" });
+    const key = fs.readFileSync(getKeyPath(), { encoding: "utf8" });
+    return key.trim();
   } else {
     return undefined;
   }
