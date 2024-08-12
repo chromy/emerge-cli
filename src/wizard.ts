@@ -1,6 +1,10 @@
 import pc from "picocolors";
-import { intro, outro, select, confirm } from "@clack/prompts";
+import { intro, outro, select, confirm, spinner } from "@clack/prompts";
 import { pause, openUrl } from "./helpers.js";
+import { exec } from "node:child_process";
+import util from "node:util";
+
+const run = util.promisify(exec);
 
 function docLink(url: string): () => Promise<void> {
   return async () => {
@@ -17,7 +21,18 @@ function docLink(url: string): () => Promise<void> {
   };
 }
 
-export async function reaperAndroid() {}
+async function runWithSpinner(cmd: string): Promise<void> {
+  const s = spinner();
+  s.start(`Running: ${cmd}`);
+  await run(cmd);
+  s.stop(`Running: ${cmd}`);
+}
+
+export async function reaperAndroid() {
+  await pause(`Now the setup wizard would edit app/build.gradle.kts etc`);
+  await runWithSpinner("./gradlew :app:emergeValidateReaperRelease");
+  await runWithSpinner("./gradlew :app:bundleRelease");
+}
 
 const wizardTable = {
   snapshots: {

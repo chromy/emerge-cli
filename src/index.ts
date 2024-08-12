@@ -93,6 +93,8 @@ async function doMain(): Promise<number> {
       return doWizard(argv);
     case "upload":
       return doUpload(argv);
+    case "selftest":
+      return 0;
     default:
       printUsage();
       return 0;
